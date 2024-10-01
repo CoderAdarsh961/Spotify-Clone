@@ -25,7 +25,7 @@ function formatTime(seconds) {
 
 async function getSongs(folder) {
     currfolder = folder;
-    let a = await fetch(`http://127.0.0.1:3000/${folder}/`);
+    let a = await fetch(`https://coderadarsh961.github.io/Spotify-Clone/${folder}/`);
     let response = await a.text();
     let parser = new DOMParser();
     let doc = parser.parseFromString(response, 'text/html');
@@ -49,14 +49,14 @@ async function getSongs(folder) {
     for (const song of songs) {
         let songName = song.replaceAll("%20", " ");
         newHTML += `<li>
-                            <img class = "inverted" src ="/Img/music.svg" alt="">
+                            <img class = "inverted" src ="Img/music.svg" alt="">
                             <div class="info">
                                 <div>${songName}</div>
                                 <div>Adarsh</div>
                             </div>
                             <div class="playnow">
                                 <span>Play Now</span>
-                                <img class = "inverted" src="/Img/play.svg" alt="">
+                                <img class = "inverted" src="Img/play.svg" alt="">
                             </div>
                         </li>`;  // Add each song inside <li> tags
     }
@@ -80,10 +80,10 @@ async function getSongs(folder) {
 
 const playMusic = (track, paused = false) => {
     //  let audio = new Audio("/songs/" + track)
-    currentSong.src = `http://127.0.0.1:3000/${currfolder}/` + track
+    currentSong.src = `https://coderadarsh961.github.io/Spotify-Clone/${currfolder}/` + track
     if (!paused) {
         currentSong.play();
-        play.src = "/Img/pause.svg";
+        play.src = "Img/pause.svg";
     }
     document.querySelector(".songinfo").innerHTML = decodeURI(track);
     document.querySelector(".songtime").innerHTML = "00:00/00:00";
@@ -92,7 +92,7 @@ const playMusic = (track, paused = false) => {
 
 
 async function displayAblums() {
-    let a = await fetch(`http://127.0.0.1:3000/songs/`);
+    let a = await fetch(`https://coderadarsh961.github.io/Spotify-Clone/songs/`);
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -108,7 +108,7 @@ async function displayAblums() {
                 continue;
             }
 
-            let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`);
+            let a = await fetch(`https://coderadarsh961.github.io/Spotify-Clone/songs/${folder}/info.json`);
             let response = await a.json();
             console.log(response)
             cardContainer.innerHTML =  cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
@@ -153,10 +153,10 @@ async function main() {
     play.addEventListener("click", () => {
         if (currentSong.paused) {
             currentSong.play();
-            play.src = "/Img/pause.svg";
+            play.src = "Img/pause.svg";
         } else {
             currentSong.pause();
-            play.src = "/Img/play.svg";
+            play.src = "Img/play.svg";
         }
     });
 
